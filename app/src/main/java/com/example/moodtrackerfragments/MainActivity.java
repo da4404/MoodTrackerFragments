@@ -22,18 +22,19 @@ public class MainActivity extends AppCompatActivity {
             int color = Color.WHITE;
             if (id == R.id.nav_happy) {
                 selectedFragment = new HappyFragment();
-                color = Color.parseColor("#E8F5E9");
+                color = Color.GREEN;
             } else if (id == R.id.nav_neutral) {
                 selectedFragment = new NeutralFragment();
-                color = Color.parseColor("#E3F2FD");
+                color = Color.YELLOW;
             } else if (id == R.id.nav_sad) {
                 selectedFragment = new SadFragment();
-                color = Color.parseColor("#F5F5F5");
+                color = Color.BLUE;
             }
 
             // החלפת הפרגמנט בפועל
             if (selectedFragment != null) {
                 getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit();
                 bottomNav.setBackgroundColor(color);
