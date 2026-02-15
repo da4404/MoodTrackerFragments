@@ -2,6 +2,8 @@ package com.example.moodtrackerfragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
+        EditText nameInput = findViewById(R.id.etName);
         // הגדרת מאזין ללחיצות בתפריט
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -31,8 +33,11 @@ public class MainActivity extends AppCompatActivity {
                 color = Color.BLUE;
             }
 
-            // החלפת הפרגמנט בפועל
             if (selectedFragment != null) {
+                String userName = nameInput.getText().toString();
+                Bundle envelope = new Bundle();
+                envelope.putString("my_name", userName);
+                selectedFragment.setArguments(envelope);
                 getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.fragment_container, selectedFragment)
